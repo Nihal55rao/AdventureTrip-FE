@@ -1,0 +1,23 @@
+<div style="background-color: rgb(232, 230, 230)">
+        <div class="row row-cols-3" style="padding-left: 90px;padding-right: 90px;padding-top: 50px;">
+            <div *ngFor="let item of topTours">
+                <app-tour-cards
+                    [name]="item.name"
+                    [difficulty]="item.difficulty"
+                    [price]="item.price"
+                    [duration]="item.duration"
+                    [summary]="item.summary"
+                    [ratingsQuantity]="item.ratingsQuantity"
+                    [ratingsAverage]="item.ratingsAverage"
+                    [difficulty]="item.difficulty"
+                    [maxGroupSize]="item.maxGroupSize"
+                    [startDates]="item.startDates"
+                    [imageCover]="item.imageCover"
+                    [id]="item.id"
+                    [startLocation]="item.startLocation"
+                    [stops]="item.locations.length"
+                    >
+                  </app-tour-cards>
+            </div>
+        </div>
+</div>

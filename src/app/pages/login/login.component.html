@@ -1,0 +1,30 @@
+
+<div style="padding: 30px;">
+    <app-header></app-header>
+    <div style="background-color: rgb(232, 230, 230);padding-top: 50px;padding-bottom: 50px;">
+        <div class="login-form">
+            <h2 class="heading-secondary ma-bt-lg">Log into your account</h2>
+          
+            <form class="form form--login" (ngSubmit)="onLoginUp()">
+              <div class="form__group">
+                <label class="form__label" for="email">Email address</label>
+                <input type="email" class="form__input" id="email" name="email" placeholder="you@example.com" required [(ngModel)]="email">
+              </div>
+          
+              <div class="form__group ma-bt-md">
+                <label class="form__label" for="password">Password</label>
+                <input type="password" class="form__input" id="password" name="password" placeholder="••••••••" required minlength="8" [(ngModel)]="password">
+                <!-- <span class="password-visibility-toggle" (click)="togglePasswordVisibility()">
+                  <i *ngIf="!isPasswordVisible" class="fas fa-eye"></i>
+                  <i *ngIf="isPasswordVisible" class="fas fa-eye-slash"></i>
+                </span> -->
+              </div>
+          
+              <div class="form__group">
+                <button type="submit" class="btn btn--green">Login</button>
+              </div>
+            </form>
+          </div>
+    </div>
+</div>
+  
