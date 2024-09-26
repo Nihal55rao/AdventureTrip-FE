@@ -25,6 +25,6 @@ jobs:
       - name: Pull image from docker hub
         run: docker pull nihalr2001/adventuretrip-angular-app:latest
       - name: Delete old container
-        run: docker rm -f nodejs-app-container
+        run: docker rm -f angular-app-container
       - name: Run docker container
-        run: docker run -d -p 4200:80 --name nodejs-app-container nihalr2001/adventuretrip-angular-app:latest
+        run: docker run -d -p 4200:80 --name angular-app-container nihalr2001/adventuretrip-angular-app:latest
