@@ -17,7 +17,7 @@ RUN npm ci
 COPY . .
 
 # Build the Angular app
-RUN ng build --prod
+RUN npm run build
 
 # Serve the Angular app with NGINX
 FROM nginx:1.23-alpine
