@@ -27,6 +27,9 @@ RUN rm -rf /usr/share/nginx/html/*
 # Copy the built Angular app from the build stage
 COPY --from=build /app/dist/my-app /usr/share/nginx/html
 
+# Copy custom NGINX configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Expose the port that NGINX is serving on
 EXPOSE 80
 
