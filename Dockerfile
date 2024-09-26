@@ -10,9 +10,10 @@ RUN npm run build
 # serve the angular app with nginx
 FROM nginx:1.23-alpine
 WORKDIR /usr/share/nginx/html
+# Remove existing content in the NGINX directory
 RUN rm -rf *
 
-#copy the built angular app from the build stage
-COPY --from=build /app/dist/my-app .
+# Copy the built Angular app from the build stage
+COPY --from=build /app/dist/my-app .  
 EXPOSE 80
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
