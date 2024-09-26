@@ -12,8 +12,11 @@ RUN npm ci
 # Copy the entire application code
 COPY . .
 
+# Set environment variable for OpenSSL compatibility
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
 # Build the Angular app
-RUN npm run build -- --prod
+RUN npm run build
 
 # Stage 2: Serve the Angular app with NGINX
 FROM nginx:1.23-alpine
@@ -22,7 +25,7 @@ FROM nginx:1.23-alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy the built Angular app from the build stage
-COPY --from=build /app/dist/my-app .  # Ensure 'my-app' matches the output path from angular.json
+COPY --from=build /app/dist/my-app /usr/share/nginx/html
 
 # Expose the port that NGINX is serving on
 EXPOSE 80
