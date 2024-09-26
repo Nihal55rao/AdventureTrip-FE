@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
+  baseUrl: any = "http://54.211.125.64:3000";
   constructor(private http : HttpClient) { }
 
   // private getAuthToken(): string {
@@ -19,23 +20,23 @@ export class ApiService {
 
 
   signup(data: any): Observable<any> {
-    return this.http.post<any>("/api/v1/users/signup", data, {withCredentials: true});
+    return this.http.post<any>(`${this.baseUrl}/api/v1/users/signup`, data, {withCredentials: true});
   }
 
   login(data: any): Observable<any> {
-    return this.http.post<any>("/api/v1/users/login", data, { withCredentials: true });
+    return this.http.post<any>(`${this.baseUrl}/api/v1/users/login`, data, { withCredentials: true });
   }
 
   updateUserPassword(data: any): Observable<any> {
-    return this.http.patch<any>("/api/v1/users/updateMyPassword", data, { withCredentials: true });
+    return this.http.patch<any>(`${this.baseUrl}/api/v1/users/updateMyPassword`, data, { withCredentials: true });
   }
 
   updateUserProfile(data: any): Observable<any> {
-    return this.http.patch<any>("/api/v1/users/updateMyProfile", data, { withCredentials: true });
+    return this.http.patch<any>(`${this.baseUrl}/api/v1/users/updateMyProfile`, data, { withCredentials: true });
   }
 
   getTopTours() {
-    return this.http.get<any>("/api/v1/tours/top-9-tours").pipe(map((res:any) => {
+    return this.http.get<any>(`${this.baseUrl}/api/v1/tours/top-9-tours`).pipe(map((res:any) => {
       return res
     }))
   };
@@ -44,13 +45,13 @@ export class ApiService {
     // const token = this.getAuthToken();
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.get<any>("/api/v1/tours",{ withCredentials: true }).pipe(map((res:any) => {
+    return this.http.get<any>(`${this.baseUrl}/api/v1/tours`,{ withCredentials: true }).pipe(map((res:any) => {
       return res
     }))
   };
 
   getUser() {
-    return this.http.get<any>("/api/v1/users/getMyProfile",{ withCredentials: true }).pipe(map((res:any) => {
+    return this.http.get<any>(`${this.baseUrl}/api/v1/users/getMyProfile`,{ withCredentials: true }).pipe(map((res:any) => {
       return res
     }))
   }
@@ -60,7 +61,7 @@ export class ApiService {
     // console.log('token', token)
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    return this.http.get<any>(`/api/v1/tours/${id}`).pipe(map((res:any) => {
+    return this.http.get<any>(`${this.baseUrl}/api/v1/tours/${id}`).pipe(map((res:any) => {
       return res
     }))
   };
