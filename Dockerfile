@@ -1,7 +1,6 @@
-# Build stage
-FROM node:16-alpine as build
+# Stage 1: Build the Angular app
+FROM node:20-alpine AS build
 
-# Set working directory
 WORKDIR /app
 
 # Copy package.json and package-lock.json
@@ -10,32 +9,23 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci
 
-# Install Angular CLI locally
-RUN npm install @angular/cli --save-dev
-
-# Copy the rest of the application code
+# Copy the entire application code
 COPY . .
 
-# Clear npm cache
-RUN npm cache clean --force
+# Build the Angular app
+RUN npm run build -- --prod
 
-# Build the Angular app with legacy OpenSSL
-RUN NODE_OPTIONS=--openssl-legacy-provider npm run build
-
-# Serve the Angular app with NGINX
+# Stage 2: Serve the Angular app with NGINX
 FROM nginx:1.23-alpine
 
-# Set working directory for NGINX
-WORKDIR /usr/share/nginx/html
-
-# Remove existing content in the NGINX directory
-RUN rm -rf *
+# Remove the default NGINX contents
+RUN rm -rf /usr/share/nginx/html/*
 
 # Copy the built Angular app from the build stage
-COPY --from=build /app/dist/my-app .
+COPY --from=build /app/dist/my-app .  # Ensure 'my-app' matches the output path from angular.json
 
-# Expose port 80
+# Expose the port that NGINX is serving on
 EXPOSE 80
 
-# Start NGINX server
-ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+# Start NGINX
+CMD ["nginx", "-g", "daemon off;"]
