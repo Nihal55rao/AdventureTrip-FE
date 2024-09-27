@@ -7,11 +7,11 @@
     </div>
     <nav class="nav nav--user">
       <ng-container *ngIf="loggedin; else loggedOut">
-        <a class="nav__el nav__el--logout" (click)="logout()">Log out</a>
+        <!-- <a class="nav__el nav__el--logout" (click)="logout()">Log out</a>
         <a class="nav__el" routerLink="/profile">
           <img class="nav__user-img" [src]="photo" [alt]="'Photo of ' + user.name">
           <span>{{ user.name.split(' ')[0] }}</span>
-        </a>
+        </a> -->
       </ng-container>
       <ng-template #loggedOut>
         <a class="nav__el" routerLink="/login">Log in</a>
