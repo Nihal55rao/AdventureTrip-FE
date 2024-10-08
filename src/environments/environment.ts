@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://34.207.167.163:3000' // Update this with your Node.js API base URL
+  apiUrl: 'http://34.228.235.216:3000' // Update this with your Node.js API base URL
 };
 
 /*

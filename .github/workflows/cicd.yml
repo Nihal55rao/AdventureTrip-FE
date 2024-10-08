@@ -14,17 +14,17 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}       
       - name: Build docker image
-        run: docker build -t nihalr2001/adventuretrip-angular-app-dev .
+        run: docker build -t nihalr2001/adventuretrip-fe-dev .
       - name: Publish image to docker hub
-        run: docker push nihalr2001/adventuretrip-angular-app-dev:latest
+        run: docker push nihalr2001/adventuretrip-fe-dev:latest
         
   deploy:
     needs: build
     runs-on: self-hosted
     steps:
       - name: Pull image from docker hub
-        run: docker pull nihalr2001/adventuretrip-angular-app-dev:latest
+        run: docker pull nihalr2001/adventuretrip-fe-dev:latest
       - name: Delete old container
         run: docker rm -f angular-app-container  
       - name: Run docker container
-        run: docker run -d -p 4200:80 --name angular-app-container nihalr2001/adventuretrip-angular-app-dev
+        run: docker run -d -p 4200:80 --name angular-app-container nihalr2001/adventuretrip-fe-dev
